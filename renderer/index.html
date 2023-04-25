@@ -10,13 +10,25 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>Grammar Correction App</title>
   </head>
   <body>
 
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <h1>Grammar Correction</h1>
+    <div>
+
+      <form id="form_sentence">
+        <label for="sentence">Sentence:</label><br>
+        <textarea name="sentence" rows="4"></textarea><br>
+        <input type="submit" value="Submit"><br>
+      </form>
+      <br>
+      <div>
+        <label for="sentence_corrected">Corrected Sentence:</label><br>
+        <textarea id="sentence_corrected" rows="4" readonly></textarea>
+      </div>
+
+    </div>
 
   </body>
   <script src="./js/renderer.js"></script>
