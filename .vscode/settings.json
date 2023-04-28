@@ -1,3 +1,5 @@
 {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false,
+    "vscode-pets.throwBallWithMouse": true,
+    "vscode-pets.theme": "beach"
 }
