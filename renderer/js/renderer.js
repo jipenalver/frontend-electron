@@ -1,12 +1,13 @@
 const form = document.getElementById("form_sentence");
 if (form) {
-  form.onsubmit = function (e) {
+  form.onsubmit = async function (e) {
     e.preventDefault();
 
     const formData = new FormData(form);
 
-    for (const [key, value] of formData) {
-      console.log(`${key}: ${value}\n`);
-    }
+    //console.log(formData.get("sentence"));
+
+    const response = await window.axios.openAI(formData.get("sentence"));
+    document.getElementById("sentence_corrected").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
   };
 }
