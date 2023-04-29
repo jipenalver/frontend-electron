@@ -5,8 +5,6 @@ if (form) {
 
     const formData = new FormData(form);
 
-    //console.log(formData.get("sentence"));
-
     const response = await window.axios.openAI(formData.get("sentence"));
     document.getElementById("sentence_corrected").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
   };
