@@ -11,7 +11,7 @@ if (form) {
       return;
     }
 
-    const response = await window.axios.openAI(formData.get("sentence"));
+    const response = await window.axios.openAI(sentence);
     document.getElementById("sentence_corrected").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
   };
 }
