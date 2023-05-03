@@ -18,17 +18,27 @@
 
     <!-- Container -->
     <div class="container theme-bg-primary p-5 mt-3 text-center">
-      <img class="w-25 h-25 mb-4" src="./images/img_logo.png">
+      <img class="w-25 h-25 mb-5" src="./images/img_logo.png">
 
       <form id="form">
         <!-- Tools Type -->
-        <div class="form-floating mb-3">
-          <select class="form-select" name="tools_type">
-            <option value="" selected>Choose Tools</option>
-            <option value="Grammar Correction">Grammar Correction</option>
-            <option value="Summarize for 2nd Grader">Summarize for 2nd Grader</option>
-          </select>
-          <label class="fw-bold" for="floatingInput">OpenAI Tools</label>
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input mt-3" type="radio" name="tools_type" value="Grammar Correction" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                <img class="w-100 h-75" src="./images/img_tool_grammar.png">
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input mt-3" type="radio" name="tools_type" value="Summarize for 2nd Grader" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                <img class="w-100 h-75" src="./images/img_tool_summarize.png">
+              </label>
+            </div>
+          </div>
         </div>
 
         <!-- Type of Extraction -->

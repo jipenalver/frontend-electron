@@ -69,13 +69,13 @@ if (form) {
     let extraction_type = formData.get("extraction_type");
     let sentence = extraction_type == 'Text' ? formData.get("sentence") : formData.get("sentence-img");
 
-    if (tools_type.length == 0) {
+    if (tools_type == null) {
       alertMessage("error", "Please choose OpenAI Tools!");
       return;
     }
 
     if (sentence.length <= 8) {
-      alertMessage("error", "Please input at least 8 characters!");
+      alertMessage("error", "Please input text or upload image to extract text!");
       return;
     }
 
@@ -96,7 +96,7 @@ function alertMessage(status, sentence){
     stopOnFocus: true,
     style: {
       textAlign: "center",
-      background: status == "error" ? "#A84448":"#539165",
+      background: status == "error" ? "#E76161":"#539165",
       color: "white",
       padding: "5px",
       marginTop: "2px"
