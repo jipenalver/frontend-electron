@@ -79,7 +79,7 @@ if (form) {
       return;
     }
 
-    submit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+    submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     submit.disabled = true;
     const response = await window.axios.openAI(sentence, tools_type);
     document.getElementById("div-result-text").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');

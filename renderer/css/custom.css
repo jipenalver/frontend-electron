@@ -1,16 +1,24 @@
 
 .theme-bg-surface{
-    background-color: #0A4D68 !important;
+    background-color: #F6F1F1 !important;
 }
 
 .theme-bg-primary{
-    background-color: #088395 !important;
+    background-color: #FFFFFF !important;
 }
 
 .theme-bg-secondary{
-    background-color: #05BFDB !important;
+    background-color: #19A7CE !important;
+}
+
+.theme-bg-tertiary{
+    background-color: #146C94 !important;
 }
 
 .theme-bg-text{
-    color: #00FFCA !important;
+    color: #146C94 !important;
+}
+
+.form-textarea{
+    height: 125px !important;
 }

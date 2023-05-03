@@ -17,8 +17,9 @@
   <body class="theme-bg-surface">
 
     <!-- Container -->
-    <div class="container border border-primary theme-bg-primary p-5 mt-3 text-center">
-      <h2 class="mb-3 text-white">OpenAI Tools</h2>
+    <div class="container theme-bg-primary p-5 mt-3 text-center">
+      <img class="w-25 h-25 mb-4" src="./images/img_logo.png">
+
       <form id="form">
         <!-- Tools Type -->
         <div class="form-floating mb-3">
@@ -43,18 +44,16 @@
         <!-- Type: Text Only -->
         <div id="ext-div-text" class="d-none">
           <div class="form-floating mb-3">
-            <textarea class="form-control h-100" name="sentence"></textarea>
+            <textarea class="form-control form-textarea" name="sentence"></textarea>
             <label class="fw-bold" for="floatingTextarea">Text</label>
           </div>
-
-          <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
         </div>
 
         <!-- Type: Image -->
         <div id="ext-div-image" class="d-none">
           <div class="row mb-3">
             <div class="col">
-              <input class="form-control" type="file" id="file-extract">
+              <input class="form-control fw-bold" type="file" id="file-extract">
             </div>
             <div class="col">
               <button class="btn btn-primary w-100 fw-bold" type="button" id="btn-extract">Extract Text</button>
@@ -62,20 +61,19 @@
           </div>
 
           <div class="form-floating mb-3">
-            <textarea class="form-control h-100" name="sentence-img"></textarea>
+            <textarea class="form-control form-textarea" name="sentence-img"></textarea>
             <label class="fw-bold" for="floatingTextarea">Extracted Text</label>
           </div>
-
-          <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
+        </div>
+        
+        <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
+        <!-- Result -->
+        <div id="div-result"  class="form-floating mt-3 d-none">
+          <textarea class="form-control form-textarea" id="div-result-text" readonly></textarea>
+          <label class="fw-bold" for="floatingTextarea">Result</label>
         </div>
       </form>
-
-      <!-- Result -->
-      <div id="div-result"  class="form-floating mt-3 d-none">
-        <textarea class="form-control h-100" id="div-result-text" readonly></textarea>
-        <label class="fw-bold" for="floatingTextarea">Result</label>
-      </div>
-
+      <!-- End of Container -->
     </div>
 
     <script src="./js/bootstrap/bootstrap.bundle.min.js"></script>
