@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 const Toastify = require('toastify-js');
 
 contextBridge.exposeInMainWorld("axios", {
-  openAI: (sentence) => ipcRenderer.invoke('axios.openAI', sentence),
+  openAI: (sentence, tools) => ipcRenderer.invoke('axios.openAI', sentence, tools),
   tesseract: (image) => ipcRenderer.invoke('axios.tesseract', image)
 });
 

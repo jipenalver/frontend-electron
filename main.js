@@ -3,6 +3,8 @@ const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
 const axios = require('axios');
 const dotenv = require('dotenv').config();
+const FormData = require('form-data');
+const fs = require('fs');
 
 // Global Variables
 const isDev = true;
@@ -103,6 +105,7 @@ const createWindow = () => {
   main.loadFile(path.join(__dirname, "./renderer/index.html"));
 };
 
+// About Window
 function aboutWindow () {
   const about = new BrowserWindow({
     width: 400,
@@ -118,6 +121,7 @@ function aboutWindow () {
 app.whenReady().then(() => {
   // Initialize Functions
   ipcMain.handle('axios.openAI', openAI);
+  ipcMain.handle('axios.tesseract', tesseract);
 
   // Create Main Window
   createWindow();
@@ -138,7 +142,8 @@ app.on("window-all-closed", () => {
 });
 
 // Main Functions
-async function openAI(event, sentence){
+// Axios OpenAI API
+async function openAI(event, sentence, tools_type){
   let result = null;
 
   const env = dotenv.parsed;
@@ -147,9 +152,9 @@ async function openAI(event, sentence){
       url: 'https://api.openai.com/v1/completions',
       data: {
         model: "text-davinci-003",
-        prompt: "Correct this to standard English:\n\n" + sentence,
-        temperature: 0,
-        max_tokens: 60,
+        prompt: ( tools_type == 'Grammar Correction' ? "Correct this to standard English:\n\n" : "Summarize this for a second-grade student:\n\n" ) +  sentence,
+        temperature: ( tools_type == 'Grammar Correction' ? 0 : 0.7 ),
+        max_tokens: ( tools_type == 'Grammar Correction' ? 60 : 64 ),
         top_p: 1.0,
         frequency_penalty: 0.0,
         presence_penalty: 0.0
@@ -162,7 +167,28 @@ async function openAI(event, sentence){
       result = response.data;
     })
     .catch(function (error) {
-      result = error;
+      result = error.response.data;
+    });
+
+  return result;
+}
+
+// Axios User defined API
+async function tesseract(event, filepath){
+  let result = null;
+
+  var formData = new FormData();
+  formData.append("image", fs.createReadStream(filepath));
+
+  await axios.post('http://backend.test/api/ocr', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(function (response) {
+      result = response.data;
+    })
+    .catch(function (error) {
+      result = error.response.data;
     });
 
   return result;
