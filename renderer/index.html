@@ -22,7 +22,8 @@
 
       <form id="form">
         <!-- Tools Type -->
-        <div class="row mb-3">
+        <div class="row mb-3 text-start">
+          <label class="fw-bold">OpenAI Tools</label>
           <div class="col">
             <div class="form-check">
               <input class="form-check-input mt-3" type="radio" name="tools_type" value="Grammar Correction" id="flexRadioDefault1">
@@ -41,47 +42,58 @@
           </div>
         </div>
 
-        <!-- Type of Extraction -->
-        <div class="form-floating mb-3">
-          <select class="form-select" name="extraction_type">
-            <option value="" selected>Choose Type</option>
-            <option value="Text">Text</option>
-            <option value="Image">Image</option>
-          </select>
-          <label class="fw-bold" for="floatingInput">Type of Extraction</label>
+        <!-- Extraction Type -->
+        <div class="row mb-3 text-start">
+          <label class="fw-bold">Type of Extraction</label>
         </div>
-        
-        <!-- Type: Text Only -->
-        <div id="ext-div-text" class="d-none">
-          <div class="form-floating mb-3">
-            <textarea class="form-control form-textarea" name="sentence"></textarea>
-            <label class="fw-bold" for="floatingTextarea">Text</label>
-          </div>
-        </div>
-
-        <!-- Type: Image -->
-        <div id="ext-div-image" class="d-none">
-          <div class="row mb-3">
-            <div class="col">
-              <input class="form-control fw-bold" type="file" id="file-extract">
-            </div>
-            <div class="col">
-              <button class="btn btn-primary w-100 fw-bold" type="button" id="btn-extract">Extract Text</button>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold" id="pills-text-tab" data-bs-toggle="pill" data-bs-target="#pills-text" type="button" role="tab" aria-controls="pills-text" aria-selected="true">Text</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold" id="pills-image-tab" data-bs-toggle="pill" data-bs-target="#pills-image" type="button" role="tab" aria-controls="pills-image" aria-selected="false">Image</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- Type: Text Only -->
+          <div class="tab-pane fade show active" id="pills-text" role="tabpanel" aria-labelledby="pills-text-tab" tabindex="0">
+            <div class="card card-body">
+              <div class="form-floating mb-3">
+                <textarea class="form-control form-textarea" name="sentence-text"></textarea>
+                <label class="fw-bold" for="floatingTextarea">Text</label>
+              </div>
             </div>
           </div>
-
-          <div class="form-floating mb-3">
-            <textarea class="form-control form-textarea" name="sentence-img"></textarea>
-            <label class="fw-bold" for="floatingTextarea">Extracted Text</label>
+          <!-- Type: Image -->
+          <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab" tabindex="0">
+            <div class="card card-body">
+              <div class="row mb-3">
+                <div class="col">
+                  <input class="form-control fw-bold" type="file" id="file-extract">
+                </div>
+                <div class="col">
+                  <button class="btn btn-primary w-100 fw-bold" type="button" id="btn-extract">Extract Text</button>
+                </div>
+              </div>
+    
+              <div class="form-floating mb-3">
+                <textarea class="form-control form-textarea" name="sentence-img"></textarea>
+                <label class="fw-bold" for="floatingTextarea">Extracted Text</label>
+              </div>
+            </div>
           </div>
         </div>
         
-        <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
         <!-- Result -->
-        <div id="div-result"  class="form-floating mt-3 d-none">
-          <textarea class="form-control form-textarea" id="div-result-text" readonly></textarea>
-          <label class="fw-bold" for="floatingTextarea">Result</label>
+        <div class="card card-body mt-3">
+          <button class="btn btn-primary w-25 fw-bold align-self-center" type="submit">Process Text</button>
+          
+          <div id="div-result" class="form-floating mt-3">
+            <textarea class="form-control form-textarea" id="div-result-text" readonly></textarea>
+            <label class="fw-bold" for="floatingTextarea">Result</label>
+          </div>
         </div>
+        
       </form>
       <!-- End of Container -->
     </div>
