@@ -4,29 +4,76 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
     <meta
       http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
-    <title>Grammar Correction App</title>
+    <title>OpenAI Tools</title>
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
   </head>
-  <body class="bg-dark">
+  <body class="theme-bg-surface">
 
-    <div class="container bg-info bg-opacity-25 border border-info p-5 mt-2">
-      <h1 class="text-center text-white">Grammar Correction</h1>
+    <!-- Container -->
+    <div class="container border border-primary theme-bg-primary p-5 mt-3 text-center">
+      <h2 class="mb-3 text-white">OpenAI Tools</h2>
+      <form id="form">
+        <!-- Tools Type -->
+        <div class="form-floating mb-3">
+          <select class="form-select" name="tools_type">
+            <option value="" selected>Choose Tools</option>
+            <option value="Grammar Correction">Grammar Correction</option>
+            <option value="Summarizer">Summarizer</option>
+          </select>
+          <label class="fw-bold" for="floatingInput">OpenAI Tools</label>
+        </div>
 
-      <form class="" id="form_sentence">
-        <label class="form-label text-white" for="sentence">Sentence:</label>
-        <textarea class="form-control mb-3" name="sentence" rows="4"></textarea>
-        <input class="btn btn-primary mb-3" type="submit" value="Submit">
+        <!-- Type of Extraction -->
+        <div class="form-floating mb-3">
+          <select class="form-select" name="extraction_type">
+            <option value="" selected>Choose Type</option>
+            <option value="Text">Text</option>
+            <option value="Image">Image</option>
+          </select>
+          <label class="fw-bold" for="floatingInput">Type of Extraction</label>
+        </div>
+        
+        <!-- Type: Text Only -->
+        <div id="ext-div-text" class="d-none">
+          <div class="form-floating mb-3">
+            <textarea class="form-control h-100" name="sentence"></textarea>
+            <label class="fw-bold" for="floatingTextarea">Text</label>
+          </div>
+
+          <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
+        </div>
+
+        <!-- Type: Image -->
+        <div id="ext-div-image" class="d-none">
+          <div class="row mb-3">
+            <div class="col">
+              <input class="form-control" type="file" id="file-extract">
+            </div>
+            <div class="col">
+              <button class="btn btn-primary w-100 fw-bold" type="button" id="btn-extract">Extract Text</button>
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <textarea class="form-control h-100" name="sentence" readonly></textarea>
+            <label class="fw-bold" for="floatingTextarea">Extracted Text</label>
+          </div>
+
+          <button class="btn btn-primary mb-3 w-25 fw-bold" type="submit">Process Text</button>
+        </div>
       </form>
 
-      <div class="mt-3">
-        <label class="form-label text-white" for="sentence_corrected">Corrected Sentence:</label>
-        <textarea class="form-control" id="sentence_corrected" rows="4" readonly></textarea>
+      <!-- Result -->
+      <div id="div-result"  class="form-floating mt-3 d-none">
+        <textarea class="form-control h-100" id="div-result-text" readonly></textarea>
+        <label class="fw-bold" for="floatingTextarea">Result</label>
       </div>
 
     </div>

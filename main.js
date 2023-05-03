@@ -85,7 +85,7 @@ const template = [
 const createWindow = () => {
   const main = new BrowserWindow({
     width: isDev ? 1200 : 600,
-    height: 600,
+    height: 700,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
