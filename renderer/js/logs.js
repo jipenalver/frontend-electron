@@ -1,8 +1,10 @@
 // Read Prompts from SupaBase
 getPrompts();
 async function getPrompts () {
-    const response = await window.axios.supaBase();
+    // Fetch API Response
+    const response = await window.axios.supaBase('get');
 
+    // Load table from API Response
     let htmlResult = '';
     Object.keys(response).forEach(key => {
         let date = new Date(response[key].created_at.replace(' ', 'T'));
@@ -19,7 +21,7 @@ async function getPrompts () {
                         'Action' +
                     '</button>' +
                     '<ul class="dropdown-menu">' +
-                        '<li><a id="btn_prompts_del" class="dropdown-item" href="#">Remove</a></li>' +
+                        '<li><a id="btn_prompts_del" class="dropdown-item" href="#" name="' + response[key].prompt_id + '">Remove</a></li>' +
                     '</ul>' +
                 '</div>' +
         '</tr>';
@@ -29,8 +31,18 @@ async function getPrompts () {
     tbody.innerHTML = htmlResult;
 }
 
-// Delete Prompt 
-const btn_prompts_del = document.getElementById('btn_prompts_del');
-if (btn_prompts_del) {
-
-}
+// Get Elements after Loading
+setTimeout( function () {
+    // Delete Prompt
+    const btn_prompts_del = document.getElementById('btn_prompts_del');
+    if (btn_prompts_del) {
+        btn_prompts_del.onclick = async function () {
+            const id = btn_prompts_del.name;
+            const response = await window.axios.supaBase('delete', id);
+            console.log('ID: ' + id + response);
+            
+            alertMessage("success", "Successfully deleted id #" + id + '!');
+            getPrompts();
+        };
+    }
+}, 2000);

@@ -73,8 +73,6 @@ const template = [
   {
     label: 'View',
     submenu: [
-      { role: 'minimize' },
-      { type: 'separator' },
       { role: 'reload' },
       { role: 'forceReload' },
       { type: 'separator' },
@@ -82,7 +80,8 @@ const template = [
       { role: 'zoomIn' },
       { role: 'zoomOut' },
       { type: 'separator' },
-      { role: 'togglefullscreen' }
+      { role: 'minimize' },
+      { role: 'togglefullscreen' },
     ]
   }
 ];
@@ -223,11 +222,13 @@ async function tesseract(event, filepath){
 }
 
 // Axios Supabase API
-async function supaBase(event, data = ''){
+async function supaBase(event, method, id = ''){
   let result = null;
 
   const env = dotenv.parsed;
-  await axios.get('https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts?select=*', {
+  await axios({
+      method: method,
+      url: 'https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts?' + ( method == 'get' ? 'select=*' : 'prompt_id=eq.' + id ),
       headers: {
         'apikey': env.APIKEY_SUPABASE,
         'Authorization': 'Bearer ' + env.APIKEY_SUPABASE
