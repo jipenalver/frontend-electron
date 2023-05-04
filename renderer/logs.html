@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
     <meta
       http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
     <title>OpenAI Tools</title>
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -20,8 +20,28 @@
     <div class="container theme-bg-primary p-3 mt-3 text-center">
         <h2 class="fw-bold">Application Logs</h2>
 
+        <div id="div_login" class="card card-body mt-5">
+          <img class="w-25 h-25 align-self-center mt-3" src="./images/img_logo.png">
+          
+          <form id="form_login" class="row g-3 align-self-center my-4">
+            <div class="col-4">
+              <input type="text" class="form-control w-100" name="email" placeholder="Email">
+              <div id="invalid_email" class="invalid-feedback"></div>
+            </div>
+            <div class="col-4">
+              <input type="password" class="form-control w-100" name="password" placeholder="Password">
+              <div id="invalid_password" class="invalid-feedback"></div>
+            </div>
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary mb-3 w-100 fw-bold">Login</button>
+            </div>
+          </form>
+        </div>
+
         <!-- Logs Table -->
-        <div class="card card-body mt-3">
+        <div id="div_prompts" class="card card-body mt-3 d-none">
+          <button id="btn_logout" class="btn btn-light mb-1 fw-bold align-self-end">Logout</button>
+
           <table class="table table-striped table-hover">
             <thead>
               <tr>

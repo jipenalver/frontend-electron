@@ -13,7 +13,7 @@ if (btn_extract) {
     btn_extract.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_extract.disabled = true;
     const response = await window.axios.tesseract(file.path);
-    document.querySelector("textarea[name='sentence-img']").innerHTML = JSON.stringify(response.text).replace(/\\n/g, ' ');
+    document.querySelector("textarea[name='sentence-img']").innerHTML = response.text;
     btn_extract.innerHTML = 'Extract Text';
     btn_extract.disabled = false;
   };
@@ -45,14 +45,15 @@ if (form_openai) {
     btn_submit.disabled = true;
 
     const response = await window.axios.openAI(sentence, tools_type);
-    let result = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
-    document.querySelector("#div-result textarea").innerHTML = result;
+    let result = response.choices[0].text;
+    document.querySelector("#div-result textarea").innerHTML = result.replace(/\n/g, "");
     const db_response = await window.axios.supaBase('post', '', {
         text: sentence,
         result: result,
         tools_type: tools_type
       });
     console.log(db_response);
+    
     btn_submit.innerHTML = 'Process Text';
     btn_submit.disabled = false;
   };
