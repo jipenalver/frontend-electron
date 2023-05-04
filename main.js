@@ -30,6 +30,10 @@ const template = [
     label: 'File',
     submenu: [
       {
+        label: 'App Logs',
+        click: logsWindow
+      },
+      {
         label: 'About',
         click: aboutWindow
       },
@@ -106,6 +110,28 @@ const createWindow = () => {
   main.loadFile(path.join(__dirname, "./renderer/index.html"));
 };
 
+// Application Logs Window
+function logsWindow () {
+  const logs = new BrowserWindow({
+    width: 900,
+    height: 600,
+    alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
+
+  logs.setMenuBarVisibility(false);
+
+  if (isDev) {
+    logs.webContents.openDevTools();
+  }
+
+  logs.loadFile(path.join(__dirname, "./renderer/logs.html"));
+}
+
 // About Window
 function aboutWindow () {
   const about = new BrowserWindow({
@@ -123,6 +149,7 @@ app.whenReady().then(() => {
   // Initialize Functions
   ipcMain.handle('axios.openAI', openAI);
   ipcMain.handle('axios.tesseract', tesseract);
+  ipcMain.handle('axios.supaBase', supaBase);
 
   // Create Main Window
   createWindow();
@@ -174,7 +201,7 @@ async function openAI(event, sentence, tools_type){
   return result;
 }
 
-// Axios User defined API
+// Axios Tesseract API
 async function tesseract(event, filepath){
   let result = null;
 
@@ -184,6 +211,26 @@ async function tesseract(event, filepath){
   await axios.post('http://backend.test/api/ocr', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
+      }
+    }).then(function (response) {
+      result = response.data;
+    })
+    .catch(function (error) {
+      result = error.response.data;
+    });
+
+  return result;
+}
+
+// Axios Supabase API
+async function supaBase(event, data = ''){
+  let result = null;
+
+  const env = dotenv.parsed;
+  await axios.get('https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts?select=*', {
+      headers: {
+        'apikey': env.APIKEY_SUPABASE,
+        'Authorization': 'Bearer ' + env.APIKEY_SUPABASE
       }
     }).then(function (response) {
       result = response.data;
