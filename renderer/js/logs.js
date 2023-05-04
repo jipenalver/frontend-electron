@@ -59,7 +59,7 @@ if (form_login) {
     btn_submit.innerHTML = 'Login';
     btn_submit.disabled = false;
 
-    // Load Table and Btns
+    // Load Table
     getPrompts();
   };
 }
@@ -135,5 +135,3 @@ if (tbl_prompts) {
         }
     };
 }
-
-

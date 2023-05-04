@@ -12,8 +12,10 @@ if (btn_extract) {
 
     btn_extract.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_extract.disabled = true;
+
     const response = await window.axios.tesseract(file.path);
     document.querySelector("textarea[name='sentence-img']").innerHTML = response.text;
+    
     btn_extract.innerHTML = 'Extract Text';
     btn_extract.disabled = false;
   };
