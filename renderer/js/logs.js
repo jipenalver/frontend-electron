@@ -3,7 +3,6 @@ getPrompts();
 async function getPrompts () {
     const response = await window.axios.supaBase();
 
-    const tbody = document.getElementById('tbody');
     let htmlResult = '';
     Object.keys(response).forEach(key => {
         let date = new Date(response[key].created_at.replace(' ', 'T'));
@@ -16,14 +15,22 @@ async function getPrompts () {
             '<td>' + date.toLocaleString('en-US', { timeZone: 'UTC' }) + '</td>' +
             '<td>' + 
                 '<div class="btn-group" role="group">' +
-                    '<button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">' +
+                    '<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">' +
                         'Action' +
                     '</button>' +
                     '<ul class="dropdown-menu">' +
-                        '<li><a class="dropdown-item" href="#">Remove</a></li>' +
+                        '<li><a id="btn_prompts_del" class="dropdown-item" href="#">Remove</a></li>' +
                     '</ul>' +
                 '</div>' +
         '</tr>';
     });
+
+    const tbody = document.getElementById('tbl_prompts');
     tbody.innerHTML = htmlResult;
+}
+
+// Delete Prompt 
+const btn_prompts_del = document.getElementById('btn_prompts_del');
+if (btn_prompts_del) {
+
 }

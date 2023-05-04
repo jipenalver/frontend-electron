@@ -1,8 +1,8 @@
 // Extract Text from Image
-const extract = document.getElementById("btn-extract");
-if (extract) {
-  extract.onclick = async function () {
-    const file = document.getElementById("file-extract").files[0];
+const btn_extract = document.getElementById("btn_extract");
+if (btn_extract) {
+  btn_extract.onclick = async function () {
+    const file = document.getElementById("file_extract").files[0];
 
     const file_types = ['image/png', 'image/bmp', 'image/jpeg'];
     if ( !file || !file_types.includes(file['type']) ) {
@@ -10,24 +10,24 @@ if (extract) {
       return;
     }
 
-    extract.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
-    extract.disabled = true;
+    btn_extract.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+    btn_extract.disabled = true;
     const response = await window.axios.tesseract(file.path);
     document.querySelector("textarea[name='sentence-img']").innerHTML = JSON.stringify(response.text).replace(/\\n/g, ' ');
-    extract.innerHTML = 'Extract Text';
-    extract.disabled = false;
+    btn_extract.innerHTML = 'Extract Text';
+    btn_extract.disabled = false;
   };
 }
 
 // Form Submit
-const form = document.getElementById("form");
-if (form) {
-  form.onsubmit = async function (e) {
+const form_openai = document.getElementById("form_openai");
+if (form_openai) {
+  form_openai.onsubmit = async function (e) {
     e.preventDefault();
 
-    const submit = document.querySelector("#form button[type='submit']");
-    const formData = new FormData(form);
-    let tools_type = formData.get("tools_type");
+    const btn_submit = document.querySelector("#form_openai button[type='submit']");
+    const formData = new FormData(form_openai);
+    let tools_type = formData.get("tools-type");
     let extraction_type = document.getElementById("pills-text-tab").classList.contains('active');
     let sentence = extraction_type ? formData.get("sentence-text") : formData.get("sentence-img");
 
@@ -41,12 +41,12 @@ if (form) {
       return;
     }
 
-    submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
-    submit.disabled = true;
+    btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
+    btn_submit.disabled = true;
     const response = await window.axios.openAI(sentence, tools_type);
-    document.getElementById("div-result-text").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
-    submit.innerHTML = 'Process Text';
-    submit.disabled = false;
+    document.querySelector("#div-result textarea").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
+    btn_submit.innerHTML = 'Process Text';
+    btn_submit.disabled = false;
   };
 }
 

@@ -20,13 +20,13 @@
     <div class="container theme-bg-primary p-5 mt-3 text-center">
       <img class="w-25 h-25 mb-5" src="./images/img_logo.png">
 
-      <form id="form">
+      <form id="form_openai">
         <!-- Tools Type -->
         <div class="row mb-3 text-start">
           <label class="fw-bold">OpenAI Tools</label>
           <div class="col">
             <div class="form-check">
-              <input class="form-check-input mt-3" type="radio" name="tools_type" value="Grammar Correction" id="flexRadioDefault1">
+              <input class="form-check-input mt-3" type="radio" name="tools-type" value="Grammar Correction" id="flexRadioDefault1">
               <label class="form-check-label" for="flexRadioDefault1">
                 <img class="w-100 h-75" src="./images/img_tool_grammar.png">
               </label>
@@ -34,7 +34,7 @@
           </div>
           <div class="col">
             <div class="form-check">
-              <input class="form-check-input mt-3" type="radio" name="tools_type" value="Summarize for 2nd Grader" id="flexRadioDefault2">
+              <input class="form-check-input mt-3" type="radio" name="tools-type" value="Summarize for 2nd Grader" id="flexRadioDefault2">
               <label class="form-check-label" for="flexRadioDefault2">
                 <img class="w-100 h-75" src="./images/img_tool_summarize.png">
               </label>
@@ -69,10 +69,10 @@
             <div class="card card-body">
               <div class="row mb-3">
                 <div class="col">
-                  <input class="form-control fw-bold" type="file" id="file-extract">
+                  <input class="form-control fw-bold" type="file" id="file_extract">
                 </div>
                 <div class="col">
-                  <button class="btn btn-primary w-100 fw-bold" type="button" id="btn-extract">Extract Text</button>
+                  <button class="btn btn-primary w-100 fw-bold" type="button" id="btn_extract">Extract Text</button>
                 </div>
               </div>
     
@@ -89,7 +89,7 @@
           <button class="btn btn-primary w-25 fw-bold align-self-center" type="submit">Process Text</button>
           
           <div id="div-result" class="form-floating mt-3">
-            <textarea class="form-control form-textarea" id="div-result-text" readonly></textarea>
+            <textarea class="form-control form-textarea" readonly></textarea>
             <label class="fw-bold" for="floatingTextarea">Result</label>
           </div>
         </div>
