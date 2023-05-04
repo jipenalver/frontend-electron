@@ -222,17 +222,24 @@ async function tesseract(event, filepath){
 }
 
 // Axios Supabase API
-async function supaBase(event, method, id = ''){
+async function supaBase(event, method, id = '', data = ''){
   let result = null;
-
   const env = dotenv.parsed;
+
+  let query = ( method == 'get' ? '?select=*' : (method == 'delete' ? '?prompt_id=eq.' + id : '') );
   await axios({
       method: method,
-      url: 'https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts?' + ( method == 'get' ? 'select=*' : 'prompt_id=eq.' + id ),
-      headers: {
-        'apikey': env.APIKEY_SUPABASE,
-        'Authorization': 'Bearer ' + env.APIKEY_SUPABASE
-      }
+      url: 'https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts' + query,
+      headers: ( method == 'post' ? {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        } : {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE 
+        } ),
+      data: ( method == 'post' ? data : null )
     }).then(function (response) {
       result = response.data;
     })

@@ -43,8 +43,16 @@ if (form_openai) {
 
     btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_submit.disabled = true;
+
     const response = await window.axios.openAI(sentence, tools_type);
-    document.querySelector("#div-result textarea").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
+    let result = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
+    document.querySelector("#div-result textarea").innerHTML = result;
+    const db_response = await window.axios.supaBase('post', '', {
+        text: sentence,
+        result: result,
+        tools_type: tools_type
+      });
+    console.log(db_response);
     btn_submit.innerHTML = 'Process Text';
     btn_submit.disabled = false;
   };
