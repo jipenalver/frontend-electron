@@ -31,18 +31,17 @@ async function getPrompts () {
     tbody.innerHTML = htmlResult;
 }
 
-// Get Elements after Loading
-setTimeout( function () {
-    // Delete Prompt
-    const btn_prompts_del = document.getElementById('btn_prompts_del');
-    if (btn_prompts_del) {
-        btn_prompts_del.onclick = async function () {
-            const id = btn_prompts_del.name;
+// Set Btn Delete Prompt Click functionality from Table Prompts
+const tbl_prompts = document.getElementById('tbl_prompts');
+if (tbl_prompts) {
+    tbl_prompts.onclick = async function (e) {
+        if(e.target && e.target.id == "btn_prompts_del") {
+            const id = e.target.name;
             const response = await window.axios.supaBase('delete', id);
-            console.log('ID: ' + id + response);
+            console.log(response);
             
-            alertMessage("success", "Successfully deleted id #" + id + '!');
+            alertMessage("success", "Successfully deleted id " + id + '!');
             getPrompts();
-        };
-    }
-}, 2000);
+        }
+    };
+}
