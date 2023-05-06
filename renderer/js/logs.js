@@ -84,6 +84,18 @@ if (btn_logout) {
         div_prompts.classList.remove('d-flex');
         div_prompts.classList.add('d-none');
 
+        // Clear Login Form Fields
+        const field_email = document.querySelector("#form_login input[name='email']");
+        const field_password = document.querySelector("#form_login input[name='password']");
+        const invalid_email = document.getElementById("invalid_email");
+        const invalid_password = document.getElementById("invalid_password");
+        invalid_email.innerHTML = '';
+        field_email.value = '';
+        field_email.classList.remove('is-invalid');
+        invalid_password.innerHTML = '';
+        field_password.value = '';
+        field_password.classList.remove('is-invalid');
+        
         btn_logout.innerHTML = 'Logout';
         btn_logout.disabled = false;
     }
