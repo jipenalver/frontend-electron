@@ -172,8 +172,8 @@ app.on("window-all-closed", () => {
 // Axios OpenAI API
 async function openAI(event, sentence, tools_type){
   let result = null;
-
   const env = dotenv.parsed;
+
   await axios({
       method: 'post',
       url: 'https://api.openai.com/v1/completions',
@@ -203,7 +203,6 @@ async function openAI(event, sentence, tools_type){
 // Axios Tesseract API
 async function tesseract(event, filepath){
   let result = null;
-
   var formData = new FormData();
   formData.append("image", fs.createReadStream(filepath));
 
@@ -225,8 +224,8 @@ async function tesseract(event, filepath){
 async function supaBase(event, method, id = '', data = ''){
   let result = null;
   const env = dotenv.parsed;
-
   let query = ( method == 'get' ? '?select=*' : (method == 'delete' ? '?prompt_id=eq.' + id : '') );
+
   await axios({
       method: method,
       url: 'https://lsuibxpvxqrxhkmxcmwy.supabase.co/rest/v1/prompts' + query,

@@ -49,6 +49,7 @@ if (form_openai) {
     const response = await window.axios.openAI(sentence, tools_type);
     let result = response.choices[0].text;
     document.querySelector("#div-result textarea").innerHTML = result.replace(/\n/g, "");
+    
     const db_response = await window.axios.supaBase('post', '', {
         text: sentence,
         result: result,
