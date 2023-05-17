@@ -46,9 +46,25 @@ if (form_openai) {
     btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_submit.disabled = true;
 
+    // Access OpenAI alongside the prompt
     const response = await window.axios.openAI(sentence, tools_type);
+
+    // Show Div Result
+    const div_result = document.querySelector("#div-result");
+    div_result.classList.remove('d-none');
+    div_result.classList.add('d-block');
+
+    // Check Error if it exist
+    if( response.error ) {
+      document.querySelector("#div-result textarea").innerHTML = response.error.message;
+      return;
+    }
+
+    // Provide result if there are no error
     let result = response.choices[0].text;
     document.querySelector("#div-result textarea").innerHTML = result.replace(/\n/g, "");
+    
+    // Store to database the prompt and result
     const db_response = await window.axios.supaBase('post', '', {
         text: sentence,
         result: result,
