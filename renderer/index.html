@@ -2,19 +2,103 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
     <meta
       http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self'; script-src 'self'; img-src 'self' data:"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>OpenAI Tools</title>
+    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <p>👋</p>
+  <body class="theme-bg-surface">
+
+    <!-- Container -->
+    <div class="container theme-bg-primary p-5 mt-3 text-center">
+      <img class="w-25 h-25 mb-5" src="./images/img_logo.png">
+
+      <form id="form_openai">
+        <!-- Tools Type -->
+        <div class="row mb-3 text-start">
+          <label class="fw-bold">OpenAI Tools</label>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input mt-3" type="radio" name="tools-type" value="Grammar Correction" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                <img class="w-100 h-75" src="./images/img_tool_grammar.png">
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input mt-3" type="radio" name="tools-type" value="Summarize for 2nd Grader" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                <img class="w-100 h-75" src="./images/img_tool_summarize.png">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extraction Type -->
+        <div class="row mb-3 text-start">
+          <label class="fw-bold">Type of Extraction</label>
+        </div>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold" id="pills-text-tab" data-bs-toggle="pill" data-bs-target="#pills-text" type="button" role="tab" aria-controls="pills-text" aria-selected="true">Text</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold" id="pills-image-tab" data-bs-toggle="pill" data-bs-target="#pills-image" type="button" role="tab" aria-controls="pills-image" aria-selected="false">Image</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- Type: Text Only -->
+          <div class="tab-pane fade show active" id="pills-text" role="tabpanel" aria-labelledby="pills-text-tab" tabindex="0">
+            <div class="card card-body">
+              <div class="form-floating mb-3">
+                <textarea class="form-control form-textarea" name="sentence-text"></textarea>
+                <label class="fw-bold" for="floatingTextarea">Text</label>
+              </div>
+            </div>
+          </div>
+          <!-- Type: Image -->
+          <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab" tabindex="0">
+            <div class="card card-body">
+              <div class="row mb-3">
+                <div class="col">
+                  <input class="form-control fw-bold" type="file" id="file_extract">
+                </div>
+                <div class="col">
+                  <button class="btn btn-primary w-100 fw-bold" type="button" id="btn_extract">Extract Text</button>
+                </div>
+              </div>
+    
+              <div class="form-floating mb-3">
+                <textarea class="form-control form-textarea" name="sentence-img"></textarea>
+                <label class="fw-bold" for="floatingTextarea">Extracted Text</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Result -->
+        <div class="card card-body mt-3">
+          <button class="btn btn-primary w-25 fw-bold align-self-center" type="submit">Process Text</button>
+          
+          <div id="div-result" class="form-floating mt-3 d-none">
+            <textarea class="form-control form-textarea" readonly></textarea>
+            <label class="fw-bold" for="floatingTextarea">Result</label>
+          </div>
+        </div>
+        
+      </form>
+      <!-- End of Container -->
+    </div>
+
+    <script src="./js/bootstrap/bootstrap.bundle.min.js"></script>
   </body>
+  <script src="./js/index.js"></script>
 </html>
