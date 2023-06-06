@@ -2,10 +2,10 @@ const { contextBridge, ipcRenderer } = require("electron");
 const Toastify = require('toastify-js');
 
 contextBridge.exposeInMainWorld("axios", {
-  openAI: (sentence, tools) => ipcRenderer.invoke('axios.openAI', sentence, tools),
+  openAI: (...args) => ipcRenderer.invoke('axios.openAI', ...args),
   tesseract: (image) => ipcRenderer.invoke('axios.tesseract', image),
-  supaBase: (method, id, data) => ipcRenderer.invoke('axios.supaBase', method, id, data),
-  backendLaravel: (method, path, data, token) => ipcRenderer.invoke('axios.backendLaravel', method, path, data, token)
+  supaBase: (...args) => ipcRenderer.invoke('axios.supaBase', ...args),
+  laravel: (...args) => ipcRenderer.invoke('axios.laravel', ...args)
 });
 
 contextBridge.exposeInMainWorld("Toastify", {

@@ -10,10 +10,11 @@ if (form_login) {
     btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_submit.disabled = true;
 
-    const response = await window.axios.backendLaravel('post', 'login', {
+    // Pass data to Laravel
+    const response = await window.axios.laravel('post', 'login', {
             email: formData.get("email"),
             password: formData.get("password"),
-        } );
+        });
 
     // If email and password validation fails 
     if ( response.user == null ) {
@@ -56,6 +57,7 @@ if (form_login) {
     div_prompts.classList.remove('d-none');
     div_prompts.classList.add('d-flex');
 
+    // Enable Button
     btn_submit.innerHTML = 'Login';
     btn_submit.disabled = false;
 
@@ -73,7 +75,7 @@ if (btn_logout) {
 
         // Use Token to Logout
         const token = sessionStorage.getItem('token');
-        const response = await window.axios.backendLaravel('post', 'logout', null, token);
+        const response = await window.axios.laravel('post', 'logout', null, token);
         console.log(response);
 
         // Hide Login Form and Show Prompts Table
@@ -96,6 +98,7 @@ if (btn_logout) {
         field_password.value = '';
         field_password.classList.remove('is-invalid');
         
+        // Enable Button
         btn_logout.innerHTML = 'Logout';
         btn_logout.disabled = false;
     }

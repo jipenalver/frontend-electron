@@ -149,7 +149,7 @@ app.whenReady().then(() => {
   ipcMain.handle('axios.openAI', openAI);
   ipcMain.handle('axios.tesseract', tesseract);
   ipcMain.handle('axios.supaBase', supaBase);
-  ipcMain.handle('axios.backendLaravel', backendLaravel);
+  ipcMain.handle('axios.laravel', laravel);
 
   // Create Main Window
   createWindow();
@@ -252,7 +252,7 @@ async function supaBase(event, method, id = '', data = null){
 }
 
 // Axios Laravel API
-async function backendLaravel(event, method, path, data = null, token = ''){
+async function laravel(event, method, path, data = null, token = ''){
   let result = null;
 
   await axios({

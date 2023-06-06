@@ -46,7 +46,7 @@ if (form_openai) {
     btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_submit.disabled = true;
 
-    // Access OpenAI alongside the prompt
+    // Pass Data to OpenAI
     const response = await window.axios.openAI(sentence, tools_type);
 
     // Show Div Result
@@ -72,6 +72,7 @@ if (form_openai) {
       });
     console.log(db_response);
     
+    // Enable Button
     btn_submit.innerHTML = 'Process Text';
     btn_submit.disabled = false;
   };
